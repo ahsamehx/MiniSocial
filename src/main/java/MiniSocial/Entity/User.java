@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -34,6 +36,13 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    // Many-to-Many relationship with Group (users can join multiple groups)
+    @ManyToMany(mappedBy = "members")
+    private Set<Group> joinedGroups = new HashSet<>();
+
+    // One-to-Many relationship with GroupJoinRequest (user can have multiple join requests)
+    @OneToMany(mappedBy = "user")
+    private Set<GroupJoinRequest> joinRequests = new HashSet<>();
 
     // Getters and Setters
     public Long getId() {
@@ -80,8 +89,23 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public Set<Group> getJoinedGroups() {
+        return joinedGroups;
+    }
+
+    public void setJoinedGroups(Set<Group> joinedGroups) {
+        this.joinedGroups = joinedGroups;
+    }
+
+    public Set<GroupJoinRequest> getJoinRequests() {
+        return joinRequests;
+    }
+
+    public void setJoinRequests(Set<GroupJoinRequest> joinRequests) {
+        this.joinRequests = joinRequests;
+    }
+
     public enum Role {
         USER, ADMIN
     }
-
 }

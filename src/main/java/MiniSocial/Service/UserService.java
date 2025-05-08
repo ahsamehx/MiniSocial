@@ -1,16 +1,18 @@
 package MiniSocial.Service;
 
 import MiniSocial.Entity.User;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 
 @Stateless
 public class UserService {
 
     @PersistenceContext
     private EntityManager em;
+
+    @EJB
+    private GroupService groupService;
 
     public User register(User user) {
         em.persist(user);
@@ -34,5 +36,19 @@ public class UserService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    // ========== DELEGATED GROUP ACTIONS ==========
+
+    public void createGroup(String name, String description, Long creatorId) {
+        groupService.createGroup(name, description, creatorId);
+    }
+
+    public void requestToJoinGroup(Long userId, Long groupId) {
+        groupService.handleJoinRequest(userId, groupId);
+    }
+
+    public void leaveGroup(Long userId, Long groupId) {
+        groupService.leaveGroup(userId, groupId);
     }
 }
