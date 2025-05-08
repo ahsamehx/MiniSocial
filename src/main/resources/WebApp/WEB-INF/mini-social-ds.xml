@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="urn:jboss:domain:datasources:7.0">
+    <datasource jndi-name="java:jboss/datasources/MiniSocialDS" pool-name="MiniSocialDS">
+        <connection-url>jdbc:sqlserver://localhost:1433;databaseName=MiniSocialDB</connection-url>
+        <driver>sqlserver</driver>
+        <security>
+            <user-name>your_sql_user</user-name>
+            <password>your_sql_password</password>
+        </security>
+        <validation>
+            <validate-on-match>true</validate-on-match>
+            <background-validation>false</background-validation>
+            <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLExceptionSorter"/>
+        </validation>
+    </datasource>
+</datasources>
