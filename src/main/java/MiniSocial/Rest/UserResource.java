@@ -29,9 +29,8 @@ public class UserResource {
 
     @POST
     @Path("/login")
-    public Response login(@FormParam("email") String email,
-                          @FormParam("password") String password) {
-        if (userService.authenticate(email, password)) {
+    public Response login(User loginRequest) {
+        if (userService.authenticate(loginRequest.getEmail(), loginRequest.getPassword())) {
             return Response.ok().entity("Login successful").build();
         }
         return Response.status(Response.Status.UNAUTHORIZED)
