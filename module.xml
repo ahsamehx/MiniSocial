@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.8" name="com.h2database.h2">
+    <resources>
+        <resource-root path="h2-2.2.224.jar"/>
+    </resources>
+    <dependencies>
+        <system export="true">
+            <paths>
+                <path name="javax/servlet"/>
+                <path name="javax/transaction"/>
+                <path name="javax/transaction/xa"/>
+            </paths>
+        </system>
+    </dependencies>
+</module> 
