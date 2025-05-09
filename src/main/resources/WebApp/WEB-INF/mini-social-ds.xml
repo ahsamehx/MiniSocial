@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources xmlns="urn:jboss:domain:datasources:7.0">
-    <datasource jndi-name="java:jboss/datasources/MiniSocialDS" pool-name="MiniSocialDS">
-        <connection-url>jdbc:sqlserver://localhost:1433;databaseName=MiniSocialDB</connection-url>
-        <driver>sqlserver</driver>
+    <datasource jndi-name="java:jboss/datasources/MiniSocialDS" pool-name="MiniSocialDS" enabled="true" use-java-context="true">
+        <connection-url>jdbc:h2:mem:MiniSocialDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;TRACE_LEVEL_SYSTEM_OUT=2</connection-url>
+        <driver>h2</driver>
         <security>
-            <user-name>your_sql_user</user-name>
-            <password>your_sql_password</password>
+            <user-name>sa</user-name>
+            <password>sa</password>
         </security>
         <validation>
             <validate-on-match>true</validate-on-match>
             <background-validation>false</background-validation>
-            <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLExceptionSorter"/>
+            <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.novendor.NullValidConnectionChecker"/>
+            <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.novendor.NullExceptionSorter"/>
         </validation>
+        <timeout>
+            <blocking-timeout-millis>30000</blocking-timeout-millis>
+            <idle-timeout-minutes>5</idle-timeout-minutes>
+        </timeout>
     </datasource>
+    <drivers>
+        <driver name="h2" module="com.h2database.h2">
+            <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+        </driver>
+    </drivers>
 </datasources>
