@@ -46,13 +46,27 @@
             <scope>runtime</scope>
         </dependency>
         
-        <!-- EclipseLink -->
+
+        <!-- Hibernate Core -->
         <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.jpa</artifactId>
-            <version>4.0.2</version>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.4.4.Final</version>
         </dependency>
+
+
+
+        <!-- Jakarta Persistence API -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+
     </dependencies>
+
+
 
     <build>
         <plugins>
@@ -60,6 +74,20 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>2.1.0.Final</version>
+                <configuration>
+                    <skip>false</skip>
+                    <javaOpts>
+                        <javaOpt>-Xms256m</javaOpt>
+                        <javaOpt>-Xmx1024m</javaOpt>
+                        <javaOpt>--add-opens=java.base/java.security=ALL-UNNAMED</javaOpt>
+                        <javaOpt>--add-opens=java.base/java.lang=ALL-UNNAMED</javaOpt>
+                    </javaOpts>
+                </configuration>
             </plugin>
         </plugins>
     </build>

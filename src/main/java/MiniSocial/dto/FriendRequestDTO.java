@@ -1,4 +1,4 @@
-package MiniSocial.Dto;
+package MiniSocial.dto;
 
 public class FriendRequestDTO {
     private Long friendId;

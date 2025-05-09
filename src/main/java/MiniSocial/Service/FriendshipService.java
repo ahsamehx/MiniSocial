@@ -1,6 +1,6 @@
 package MiniSocial.Service;
 
-import MiniSocial.Dto.FriendRequestDTO;
+import MiniSocial.dto.FriendRequestDTO;
 import MiniSocial.Entity.Friendship;
 import MiniSocial.Entity.FriendshipStatus;
 import MiniSocial.Entity.User;
